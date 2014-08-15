@@ -1,0 +1,51 @@
+class User < ActiveRecord::Base
+	attr_accessor :password
+    validates_presence_of :email
+    validates_presence_of :password
+    validates_uniqueness_of :email
+    validates_length_of :email, :within => 5..50
+	validates_format_of :email, :multiline => true, :with => /^[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}$/i
+
+	validates_confirmation_of :password
+	validates_length_of :password, :within => 4..20
+	validates_presence_of :password, :if => :password_required?
+
+    after_create :create_profile
+
+
+	has_one :profile, :dependent => :destroy
+    has_many :products, -> {order ('created_at DESC, title ASC') },
+                      :dependent => :nullify
+    has_many :fish
+    has_many :gamefish
+    has_many :replies, :through => :products, :source => :comments
+
+    def create_profile
+    	self.profile = Profile.new()
+    end
+
+    before_save :encrypt_new_password
+
+	def self.authenticate(email, password)
+		user = find_by_email(email)
+		return user if user && user.authenticated?(password)
+	end
+
+	def authenticated?(password)
+		self.hashed_password == encrypt(password)
+	end
+
+	protected
+		def encrypt_new_password
+			return if password.blank?
+			self.hashed_password = encrypt(password)
+		end
+
+		def password_required?
+			hashed_password.blank? || password.present?
+		end
+
+		def encrypt(string)
+			Digest::SHA1.hexdigest(string)
+		end
+end

@@ -1,0 +1,44 @@
+<h1>New fish</h1>
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>
+<script type="text/javascript">
+  	handler = Gmaps.build('Google');
+	handler.buildMap({ provider: {zoom: 13}, internal: {id: 'map'} }, function(){
+
+	  if(navigator.geolocation) {
+	  	navigator.geolocation.getCurrentPosition(displayOnMap);
+	  	navigator.geolocation.getCurrentPosition(displayinFields); 
+	  } else {
+	  	alert("no geolocation");
+	  };
+	     		
+	});
+	 
+	function displayOnMap(position){
+	  var marker = handler.addMarker({
+	    lat: position.coords.latitude,
+	    lng: position.coords.longitude
+	  },
+	  {	draggable: true
+	  });
+	  handler.map.centerOn(marker);
+	  google.maps.event.addListener(marker.getServiceObject(), 'dragend', function() {  
+       		handler.map.centerOn(marker);
+       		document.getElementById('fish_latitude').value = marker.getServiceObject().getPosition().lat();
+	 	    document.getElementById('fish_longitude').value = marker.getServiceObject().getPosition().lng();
+  	});
+
+	};
+
+
+	function displayinFields(position){
+	  document.getElementById('fish_latitude').value = position.coords.latitude;
+	  document.getElementById('fish_longitude').value = position.coords.longitude;
+	};
+
+</script>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', fish_index_path %>

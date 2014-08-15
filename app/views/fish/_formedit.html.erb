@@ -1,0 +1,49 @@
+<%= form_for(@fish) do |f| %>
+  <% if @fish.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fish.errors.count, "error") %> prohibited this fish from being saved:</h2>
+
+      <ul>
+      <% @fish.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :species %><br>
+    <%= f.select :species, ["Smallmouth Bass", "Largemouth Bass", "Rainbow Trout", "Brown Trout", "Salmon"]%>
+  </div>
+  <div class="field">
+    <%= f.label :isprivate, "Private?" %><br>
+    <%= f.check_box :isprivate %>
+  </div>
+<!--    <div class="field">
+    <%= f.label :attachment %>
+    <%= f.file_field :attachment, required: true %>
+  </div> -->
+  <div class="field">
+    <%= f.label :size %><br>
+    <%= f.text_field :size %>
+  </div>
+  <div class="field">
+    <%= f.label :latitude %><br>
+    <%= f.text_field :latitude, :readonly => true %>
+  </div>
+  <div class="field">
+    <%= f.label :longitude %><br>
+    <%= f.text_field :longitude, :readonly => true %>
+  </div>
+  <div class="field">
+    <%= f.label :caught %><br>
+    <%= f.datetime_select :caught %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Add Fish", :class => 'btn btn-primary' %>
+  </div>
+<% end %>

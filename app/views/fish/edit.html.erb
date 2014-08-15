@@ -1,0 +1,34 @@
+<h1>Editing fish</h1>
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>
+<script type="text/javascript">
+  	handler = Gmaps.build('Google');
+	handler.buildMap({ internal: {id: 'map'} }, function(){
+
+	displayOnMap(document.getElementById('fish_latitude').value, document.getElementById('fish_longitude').value) 		
+	});
+	 
+	function displayOnMap(latitude, longitude){
+	  var marker = handler.addMarker({
+	    lat: latitude,
+	    lng: longitude
+	  },
+	  {	draggable: true
+	  });
+	  handler.map.centerOn(marker);
+	  google.maps.event.addListener(marker.getServiceObject(), 'dragend', function() {  
+       		handler.map.centerOn(marker);
+       		document.getElementById('fish_latitude').value = marker.getServiceObject().getPosition().lat();
+	 	    document.getElementById('fish_longitude').value = marker.getServiceObject().getPosition().lng();
+  	});
+
+	};
+
+</script>
+<%= @fish.species %>
+
+<%= render 'formedit' %>
+
+<%= link_to 'Show', @fish %> |
+<%= link_to 'Back', fish_index_path %>

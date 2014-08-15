@@ -1,0 +1,55 @@
+<h1>Listing fish</h1>
+
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Species</th>
+      <th>Picture</th>
+      <!-- <th>Latitude</th>
+      <th>Longitude</th> -->
+      <th>Size</th>
+      <th>Caught</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fish.each do |fish| %>
+      <tr onclick="centerClicked(<%= fish.latitude %>, <%= fish.longitude %>)">
+        <td><%= fish.species %></td>
+        <td><div class="thumbfish"><img src="<%= fish.attachment_url %>" style="width: 64px;"/></div></td>
+        <!-- <td><%= fish.latitude %></td>
+        <td><%= fish.longitude %></td> -->
+        <td><%= fish.size %></td>
+        <td><%= fish.caught %></td>
+        <td><%= fish.description %></td>
+        <% if fish.owned_by? current_user %> 
+        <td><%= link_to 'Show', fish %></td>
+        <td><%= link_to 'Edit', edit_fish_path(fish) %></td>
+        <td><%= link_to 'Destroy', fish, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script type="text/javascript">
+  var toggle = 0
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {maxZoom: 13}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);  
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
+  function centerClicked(lat, lng) {
+    var coords = [lat, lng];
+    handler.map.centerOn(coords);
+  };
+</script>
+<br>
+
+<a href="<%= new_fish_path %>" class="btn btn-lg btn-primary">New Fish</a>
