@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root :to => "fish#world"
 
   resources :users 
-  resources :fish
+  resources :fish, :except => [:show]
 
   get '/world' => "fish#world"
   resources :profiles

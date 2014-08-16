@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
     has_many :products, -> {order ('created_at DESC, title ASC') },
                       :dependent => :nullify
     has_many :fish
-    has_many :gamefish
     has_many :replies, :through => :products, :source => :comments
 
     def create_profile

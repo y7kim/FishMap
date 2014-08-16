@@ -8,6 +8,7 @@
     <tr>
       <th>Species</th>
       <th>Picture</th>
+      <th>Private?</th>
       <!-- <th>Latitude</th>
       <th>Longitude</th> -->
       <th>Size</th>
@@ -18,19 +19,19 @@
   </thead>
 
   <tbody>
-    <% @fish.each do |fish| %>
-      <tr onclick="centerClicked(<%= fish.latitude %>, <%= fish.longitude %>)">
+    <% @fish.each_with_index do |fish, index| %>
+      <tr onclick="centerClicked(<%= fish.latitude %>, <%= fish.longitude %>)" id="<%= fish.id %>" markerindex="<%= index %>">
         <td><%= fish.species %></td>
         <td><div class="thumbfish"><img src="<%= fish.attachment_url %>" style="width: 64px;"/></div></td>
+        <td><%= fish.isprivate %></td>
         <!-- <td><%= fish.latitude %></td>
         <td><%= fish.longitude %></td> -->
         <td><%= fish.size %></td>
         <td><%= fish.caught %></td>
         <td><%= fish.description %></td>
-        <% if fish.owned_by? current_user %> 
-        <td><%= link_to 'Show', fish %></td>
+        <% if fish.owned_by? current_user %>
         <td><%= link_to 'Edit', edit_fish_path(fish) %></td>
-        <td><%= link_to 'Destroy', fish, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', fish, :remote => true, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
     <% end %>
@@ -38,7 +39,6 @@
 </table>
 
 <script type="text/javascript">
-  var toggle = 0
   handler = Gmaps.build('Google');
   handler.buildMap({ provider: {maxZoom: 13}, internal: {id: 'map'}}, function(){
     markers = handler.addMarkers(<%=raw @hash.to_json %>);  
@@ -49,6 +49,7 @@
     var coords = [lat, lng];
     handler.map.centerOn(coords);
   };
+
 </script>
 <br>
 

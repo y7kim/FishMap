@@ -1,0 +1,8 @@
+// hide row and marker once record is deleted
+$( "#<%= object.id %>" ).css("display", "none");
+var markerindex = $( "#<%= object.id %>" ).attr("markerindex")
+handler.removeMarker(markers[markerindex]);	
+markers.splice(markerindex,1);
+handler.bounds.extendWith(markers);
+handler.fitMapToBounds();
+

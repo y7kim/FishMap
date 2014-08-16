@@ -1,8 +1,10 @@
 == FishMap (WiP)
 
-A simple Rails & Google Maps app for fishermen.
+A CRUD Rails & Google Maps app for fishermen.
 
 TODO:
+
+* AJAX add and destroy fish
 
 * Delete uneccessary models
 

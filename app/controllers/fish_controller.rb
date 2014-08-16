@@ -36,7 +36,7 @@ class FishController < ApplicationController
 
     respond_to do |format|
       if @fish.save
-        format.html { redirect_to @fish, notice: 'Fish was successfully created.' }
+        format.html { redirect_to fish_index_url, notice: 'Fish was successfully created.' }
         format.json { render :show, status: :created, location: @fish }
       else
         format.html { render :new }
@@ -66,6 +66,7 @@ class FishController < ApplicationController
     respond_to do |format|
       format.html { redirect_to fish_index_url, notice: 'Fish was successfully destroyed.' }
       format.json { head :no_content }
+      format.js { render "destroy", :locals => {:object => @fish}}
     end
   end
 
