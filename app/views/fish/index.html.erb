@@ -20,7 +20,7 @@
 
   <tbody>
     <% @fish.each_with_index do |fish, index| %>
-      <tr onclick="centerClicked(<%= fish.latitude %>, <%= fish.longitude %>)" id="<%= fish.id %>" markerindex="<%= index %>">
+      <tr id="<%= fish.id %>" markerindex="<%= index %>">
         <td><%= fish.species %></td>
         <td><div class="thumbfish"><img src="<%= fish.attachment_url %>" style="width: 64px;"/></div></td>
         <td><%= fish.isprivate %></td>
@@ -39,16 +39,23 @@
 </table>
 
 <script type="text/javascript">
+  
   handler = Gmaps.build('Google');
   handler.buildMap({ provider: {maxZoom: 13}, internal: {id: 'map'}}, function(){
     markers = handler.addMarkers(<%=raw @hash.to_json %>);  
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
   });
+
   function centerClicked(lat, lng) {
     var coords = [lat, lng];
     handler.map.centerOn(coords);
   };
+
+  //add evt listener to rows
+  <% @fish.each_with_index do |fish, index| %>
+ document.getElementById("<%= fish.id %>").addEventListener("click", function() {centerClicked(<%= fish.latitude %>, <%= fish.longitude %>)});
+  <% end %>
 
 </script>
 <br>
