@@ -50,6 +50,7 @@
   function centerClicked(lat, lng) {
     var coords = [lat, lng];
     handler.map.centerOn(coords);
+    handler.getMap().setZoom(13);
   };
 
   //add evt listener to rows
