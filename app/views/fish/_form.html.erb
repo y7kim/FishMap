@@ -12,38 +12,39 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :species %><br>
-    <%= f.select :species, ["Smallmouth Bass", "Largemouth Bass", "Rainbow Trout", "Brown Trout", "Salmon"]%>
+    <%= f.label :species, :class => 'btn-success disabled' %><br>
+    <%= f.select :species, ["Smallmouth Bass", "Largemouth Bass", "Rainbow Trout", "Brown Trout", "Salmon"], :class => 'form-control'%>
   </div>
   <div class="field">
-    <%= f.label :isprivate, "Private?" %><br>
+    <%= f.label :isprivate, "Private?", :class => 'btn-success disabled' %><br>
     <%= f.check_box :isprivate %>
   </div>
    <div class="field">
-    <%= f.label :attachment %>
+    <%= f.label :attachment, :class => 'btn-success disabled' %>
     <%= f.file_field :attachment %>
   </div>
   <div class="field">
-    <%= f.label :size %><br>
+    <%= f.label :size, :class => 'btn-success disabled' %><br>
     <%= f.text_field :size %>
   </div>
   <div class="field">
-    <%= f.label :latitude %><br>
+    <%= f.label :latitude, :class => 'btn-success disabled' %><br>
     <%= f.text_field :latitude, :readonly => true %>
   </div>
   <div class="field">
-    <%= f.label :longitude %><br>
+    <%= f.label :longitude, :class => 'btn-success disabled' %><br>
     <%= f.text_field :longitude, :readonly => true %>
   </div>
   <div class="field">
-    <%= f.label :caught %><br>
+    <%= f.label :caught, :class => 'btn-success disabled' %><br>
     <%= f.datetime_select :caught %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.label :description, :class => 'btn-success disabled' %><br>
+    <%= f.text_area :description, rows: 2 %>
   </div>
   <div class="actions">
-    <%= f.submit "Add Fish", :class => 'btn btn-primary' %>
+    <%= link_to 'Back', :back, :class => 'btn btn-primary pull-right' %>
+    <%= f.submit "Submit", :class => 'btn btn-primary pull-right' %> 
   </div>
 <% end %>

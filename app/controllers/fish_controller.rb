@@ -50,7 +50,7 @@ class FishController < ApplicationController
   def update
     respond_to do |format|
       if @fish.update(fish_params)
-        format.html { redirect_to @fish, notice: 'Fish was successfully updated.' }
+        format.html { redirect_to fish_index_url, notice: 'Fish was successfully updated.' }
         format.json { render :show, status: :ok, location: @fish }
       else
         format.html { render :edit }

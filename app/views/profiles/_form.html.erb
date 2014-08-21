@@ -12,26 +12,27 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name, :class => 'btn-success disabled' %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :birthday %><br>
+    <%= f.label :birthday, :class => 'btn-success disabled' %><br>
     <%= f.date_select :birthday, :start_year => 1950 %>
   </div>
   <div class="field">
-    <%= f.label :bio %><br>
+    <%= f.label :bio, :class => 'btn-success disabled' %><br>
     <%= f.text_area :bio %>
   </div>
   <div class="field">
-    <%= f.label :color %><br>
+    <%= f.label :color, :class => 'btn-success disabled' %><br>
     <%= f.text_field :color %>
   </div>
   <div class="field">
-    <%= f.label :twitter %><br>
+    <%= f.label :twitter, :class => 'btn-success disabled' %><br>
     <%= f.text_field :twitter %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= link_to 'Back', :back, :class => 'btn btn-primary pull-right' %>
+    <%= f.submit "Submit", :class => 'btn btn-primary pull-right' %>
   </div>
 <% end %>

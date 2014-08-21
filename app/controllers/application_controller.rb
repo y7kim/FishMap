@@ -2,13 +2,19 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_filter :get_social
 
   protected
+
   	#returns the currently logged in user or nil if there isn't one
   	def current_user
   		return unless session[:user_id]
   		@current_user ||= User.find_by_id(session[:user_id])
   	end
+
+    def get_social
+      @social = {:twitter => "http://twitter.com/spaceship", :github =>  "http://github.com/y7kim" }
+    end
 
   	#make current user available in templates as a helper
   	helper_method :current_user

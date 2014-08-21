@@ -1,10 +1,16 @@
-<div class="media">
-	<a class="pull-left" href="<%= object.attachment_url %>">
-		<img style="width:100px;" src="<%= object.attachment_url %>"/>
-	</a>
-	<div class="media-body">
-    <h4 class="media-heading">Caught By</h4>
-    <%=  object.caught_by %>
-  </div>
-</div>
-<div onclick="window.open('http://maps.google.com/maps?saddr=Current%20Location&daddr=<%= object.latitude %>,<%= object.longitude %>')">Get Directions</div>
+<section id="infowindow">
+	<div class="row">
+        <div class="col-md-6">
+             <a class="pull-left" href="<%= object.attachment_url %>">
+				<img style="width:100px;" src="<%= object.attachment_url %>"/>
+			</a>
+        </div>
+        <div class="col-md-6">
+        	<div class="media-body">
+		    	<h4 class="media-heading">Caught By</h4>
+		    	<a href="/profiles/<%=  object.user_id %>"><%=  object.caught_by %></a>
+		  	</div>
+		  	<div class="btn btn-xs btn-success pull-right" onclick="window.open('http://maps.google.com/maps?saddr=Current%20Location&daddr=<%= object.latitude %>,<%= object.longitude %>')">Get Directions</div>
+        </div>
+ 	</div>
+</section>
