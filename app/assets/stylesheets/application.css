@@ -72,6 +72,11 @@ section .container{
 
 /*worldfish section*/
 
+#fishlist {
+  height: 500px;
+  overflow-y: scroll;
+}
+
 #worldfish .btn-primary {
   width: 100%;
   margin: 20px 0;
@@ -291,7 +296,7 @@ footer {
 }
 
 footer a{
-    color: #43ac6a;
+    color: #2c2c2c;
   }
 
 

@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /profiles
   # GET /profiles.json
@@ -62,6 +63,11 @@ class ProfilesController < ApplicationController
   end
 
   private
+    #redirect user if he/she doesn't own profile
+     def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_path) unless @user == current_user
+     end
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
       @profile = Profile.find(params[:id])

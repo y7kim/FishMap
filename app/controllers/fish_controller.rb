@@ -1,6 +1,7 @@
 class FishController < ApplicationController
   before_action :authenticate, except: [:world]
   before_action :set_fish, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /fish
   # GET /fish.json
@@ -71,6 +72,11 @@ class FishController < ApplicationController
   end
 
   private
+    #redirect user if he/she doesn't own fish
+     def correct_user
+      @fish = Fish.find(params[:id])
+      redirect_to(root_path) unless @fish.user_id == current_user.id
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_fish
       @fish = Fish.find(params[:id])

@@ -2,7 +2,10 @@
 	<div class="row">
         <div class="col-md-6">
              <a class="pull-left" href="<%= object.attachment_url %>">
-				<img style="width:100px;" src="<%= object.attachment_url %>"/>
+				<img style="width:100px;" src="<%= object.attachment_url %>"/><br />
+				<% if object.owned_by? current_user %>
+					<%= link_to 'Edit', edit_fish_path(object), :class => 'btn btn-sm' %>
+				<% end %>
 			</a>
         </div>
         <div class="col-md-6">
