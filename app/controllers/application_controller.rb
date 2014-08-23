@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+    def admin_user 
+      redirect_to(root_path) unless logged_in? && current_user.admin == true
+    end
+
   	#returns the currently logged in user or nil if there isn't one
   	def current_user
   		return unless session[:user_id]

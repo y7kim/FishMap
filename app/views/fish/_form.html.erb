@@ -1,4 +1,4 @@
-<%= form_for @fish do |f| %>
+<%= form_for(@fish) do |f| %>
   <% if @fish.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@fish.errors.count, "error") %> prohibited this fish from being saved:</h2>

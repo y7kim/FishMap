@@ -73,7 +73,7 @@ class FishController < ApplicationController
 
   private
     #redirect user if he/she doesn't own fish
-     def correct_user
+    def correct_user
       @fish = Fish.find(params[:id])
       redirect_to(root_path) unless @fish.user_id == current_user.id
     end

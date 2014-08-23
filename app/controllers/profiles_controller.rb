@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :admin_user, only: [:index]
 
   # GET /profiles
   # GET /profiles.json
@@ -64,10 +65,10 @@ class ProfilesController < ApplicationController
 
   private
     #redirect user if he/she doesn't own profile
-     def correct_user
+    def correct_user
       @user = User.find(params[:id])
       redirect_to(root_path) unless @user == current_user
-     end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
       @profile = Profile.find(params[:id])
@@ -75,6 +76,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:name, :birthday, :bio, :color, :twitter)
+      params.require(:profile).permit(:name, :birthday, :bio, :homewater, :twitter)
     end
 end

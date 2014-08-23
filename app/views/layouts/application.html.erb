@@ -54,8 +54,10 @@
     </nav>
 
   <div id="main">
-    <%= content_tag(:p, notice, :class => 'alert alert-success') if notice.present? %>	
-    <%= content_tag(:p, alert, :class => 'alert alert-warning') if alert.present? %>
+    <div class="container">
+      <%= content_tag(:p, notice, :class => 'alert alert-success') if notice.present? %>	
+      <%= content_tag(:p, alert, :class => 'alert alert-warning') if alert.present? %>
+    </div>
     <%= yield %>
   </div>
   

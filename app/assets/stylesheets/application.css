@@ -15,7 +15,7 @@
  */
 
 body { 
-  background: url('fishbg.jpg') no-repeat center center fixed;
+  background: url('http://imgur.com/MRDxggQ.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -111,6 +111,12 @@ section .container{
     background-color: rgba(0,0,0,.1);
 }
 
+/*showprofile section*/
+
+#showprofile .field {
+  color: #fff;
+}
+
 /*Navbar*/
 
 .navbar-brand,
@@ -159,7 +165,7 @@ section .container{
 }
 
 #main .alert {
-  width: 50%;
+  width: 100%;
   margin: 25px auto;
 }
 
